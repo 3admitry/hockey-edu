@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Хоккейный класс — интерактивные тесты о хоккее для юных игроков и болельщиков. Хоккейная школа Бреста. Игра в деталях."
+    />
+    <meta name="theme-color" content="#061b36" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Хоккейный класс" />
+    <meta property="og:title" content="Хоккейный класс — хоккейная школа Бреста" />
+    <meta property="og:description" content="Интерактивные тесты о правилах и языке хоккея. Игра в деталях." />
+    <meta property="og:image" content="assets/logo.png" />
+    <title>Хоккейный класс — хоккейная школа Бреста. Игра в деталях</title>
+    <link rel="icon" href="assets/logo-icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="assets/logo-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="terms.js" defer></script>
+    <script src="rules-01.js" defer></script>
+    <script src="rules-02.js" defer></script>
+    <script src="rules-03.js" defer></script>
+    <script src="rules-04.js" defer></script>
+    <script src="rules-05.js" defer></script>
+    <script src="rules-06.js" defer></script>
+    <script src="rules-07.js" defer></script>
+    <script src="rules-08.js" defer></script>
+    <script src="rules-09.js" defer></script>
+    <script src="rules-10.js" defer></script>
+    <script src="rules-12.js" defer></script>
+    <script src="rules-appendix-1.js" defer></script>
+    <script src="distractors.js" defer></script>
+    <script src="app-utils.js" defer></script>
+    <script src="app-storage.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+    <div class="ice-bg" aria-hidden="true">
+      <span class="ice-line ice-line--red"></span>
+      <span class="ice-line ice-line--blue ice-line--left"></span>
+      <span class="ice-line ice-line--blue ice-line--right"></span>
+      <span class="ice-circle ice-circle--one"></span>
+      <span class="ice-circle ice-circle--two"></span>
+    </div>
+
+    <header class="topbar">
+      <button class="brand" type="button" data-action="home" aria-label="Хоккейный класс — хоккейная школа Бреста">
+        <img class="brand__mark" src="assets/logo-icon.png" alt="" width="56" height="56" />
+        <span class="brand__text">
+          <span class="brand__name">Хоккейный <mark>класс</mark></span>
+          <span class="brand__slogan">Игра в деталях</span>
+        </span>
+      </button>
+      <div class="topbar__right">
+        <button class="nav-pill" type="button" data-action="glossary">Словарь</button>
+        <button class="nav-pill nav-pill--rules" type="button" data-action="rules">Правила</button>
+        <div class="mini-stat" title="Пройдено тестов">
+          <span aria-hidden="true">🏆</span>
+          <strong id="header-attempts">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="home-screen" class="screen screen--active" aria-labelledby="hero-title">
+        <div class="hero wrap">
+          <div class="hero__copy">
+            <div class="eyebrow"><span>Брест</span> Хоккейная школа</div>
+            <h1 id="hero-title">Сначала голова.<br /><mark>Потом шайба.</mark></h1>
+            <p>
+              Короткие тесты о правилах и языке хоккея. Отвечай, узнавай новое и
+              собирай свои победы.
+            </p>
+            <div class="hero__actions">
+              <a class="primary-button hero__button" href="#glossary-promo">
+                Начать со словаря
+                <span aria-hidden="true">↓</span>
+              </a>
+              <button class="secondary-button" type="button" data-action="rules">
+                Правила игры
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-card" aria-label="Маскот школы «Хоккейный класс»">
+            <div class="hero-card__glow"></div>
+            <!-- Старый вариант: свитер и шайба
+            <div class="jersey" aria-hidden="true">
+              <div class="jersey__sleeve jersey__sleeve--left"></div>
+              <div class="jersey__body">
+                <span>МИРОН</span>
+                <strong>50</strong>
+                <small>ЗАГЛУХИНСКИЙ</small>
+              </div>
+              <div class="jersey__sleeve jersey__sleeve--right"></div>
+            </div>
+            <div class="puck puck--hero" aria-hidden="true"><span></span></div>
+            -->
+            <img
+              class="hero-mascot"
+              src="assets/logo.png"
+              alt="Зубр-хоккеист с лампочкой за учебным столом"
+              width="500"
+              height="520"
+            />
+            <span class="spark spark--one">✦</span>
+            <span class="spark spark--two">✦</span>
+            <div class="hero-card__label">Твой первый сезон</div>
+          </div>
+        </div>
+
+        <div class="dashboard wrap">
+          <article class="stat-panel">
+            <span class="stat-panel__icon">🏒</span>
+            <div>
+              <small>Сыграно тестов</small>
+              <strong id="total-attempts">0</strong>
+            </div>
+          </article>
+          <article class="stat-panel">
+            <span class="stat-panel__icon">📘</span>
+            <div>
+              <small>Правил освоено</small>
+              <strong><span id="rules-mastered">0</span> / <span id="rules-mastered-total">91</span></strong>
+            </div>
+          </article>
+          <article class="stat-panel">
+            <span class="stat-panel__icon">📚</span>
+            <div>
+              <small>Изучено терминов</small>
+              <strong><span id="terms-learned">0</span> / <span id="terms-learned-total">106</span></strong>
+              <span
+                class="stat-panel__bar"
+                id="terms-learned-progress"
+                role="progressbar"
+                aria-label="Изучено терминов"
+                aria-valuemin="0"
+                aria-valuemax="106"
+                aria-valuenow="0"
+              ><span id="terms-learned-bar"></span></span>
+            </div>
+          </article>
+          <article class="stat-panel stat-panel--rank">
+            <span class="stat-panel__icon stat-panel__icon--orange">🏅</span>
+            <div>
+              <small>Звание</small>
+              <strong id="rank-title">Новичок</strong>
+            </div>
+          </article>
+        </div>
+
+        <section id="resume-test" class="resume-test wrap" aria-labelledby="resume-test-title" hidden>
+          <div class="resume-test__icon" aria-hidden="true">▶</div>
+          <div class="resume-test__body">
+            <span id="resume-test-title">Незаконченный тест</span>
+            <strong id="resume-test-name"></strong>
+            <small id="resume-test-progress"></small>
+            <div class="resume-test__bar"><span id="resume-test-bar"></span></div>
+          </div>
+          <div class="resume-test__actions">
+            <button class="primary-button" type="button" data-action="resume-test">Продолжить</button>
+            <button class="text-button" type="button" data-action="discard-test">Удалить</button>
+          </div>
+        </section>
+
+        <section id="glossary-promo" class="glossary-promo wrap" aria-labelledby="glossary-promo-title">
+          <div class="glossary-promo__visual" aria-hidden="true">
+            <span>EN</span>
+            <strong>Face-Off</strong>
+            <small>Вбрасывание</small>
+          </div>
+          <div class="glossary-promo__copy">
+            <span class="glossary-promo__kicker">Хоккейный язык</span>
+            <h2 id="glossary-promo-title">
+              <b id="concepts-total">106</b> хоккейных карточек
+            </h2>
+            <p>
+              Все <span id="terms-total">107</span> терминов, включая альтернативные названия.
+              Сначала пойми значение на русском, затем запомни английское название.
+            </p>
+            <div class="glossary-promo__categories" id="promo-categories"></div>
+            <div class="glossary-promo__progress">
+              <div class="glossary-promo__progress-top">
+                <span>Полный сезон</span>
+                <strong id="glossary-season-progress-label">0 / 106</strong>
+              </div>
+              <div
+                id="glossary-season-progress-bar"
+                class="glossary-promo__progress-bar"
+                role="progressbar"
+                aria-label="Прогресс полного сезона"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              ><span></span></div>
+            </div>
+          </div>
+          <div class="glossary-promo__actions">
+            <button class="season-button" type="button" data-action="season">Пройти весь словарь</button>
+            <button class="primary-button" type="button" data-action="glossary">Открыть словарь</button>
+            <button class="secondary-button" type="button" data-action="quick-quiz">Быстрый тест</button>
+          </div>
+        </section>
+
+        <section id="rules-promo" class="rules-promo wrap" aria-labelledby="rules-promo-title">
+          <div class="rules-promo__visual" aria-hidden="true">
+            <span>IIHF 2026/27</span>
+            <strong>Правила</strong>
+            <small>книга в деталях</small>
+          </div>
+          <div class="rules-promo__copy">
+            <span class="rules-promo__kicker">Хоккейная теория</span>
+            <h2 id="rules-promo-title">Правила игры без скуки</h2>
+            <p>Полный разбор: от площадки и экипировки до штрафов, судей и жестов.</p>
+            <div class="rules-promo__stats">
+              <span><b id="rules-promo-sections">12</b> разделов</span>
+              <span><b id="rules-promo-rules">91</b> правило</span>
+              <span><b id="rules-promo-questions">303</b> вопроса</span>
+            </div>
+            <div class="rules-promo__topics" id="rules-promo-topics"></div>
+          </div>
+          <div class="rules-promo__actions">
+            <button class="primary-button" type="button" data-action="rules">Открыть правила</button>
+            <button class="secondary-button" type="button" data-action="open-lesson" data-section-id="01">
+              Начать с раздела 01
+            </button>
+          </div>
+        </section>
+
+        <section id="rules-home" class="rules-home wrap" aria-labelledby="rules-home-title">
+          <div class="section-heading">
+            <div>
+              <span>Разделы правил</span>
+              <h2 id="rules-home-title">Выбери раздел</h2>
+            </div>
+            <p>Читай полный разбор раздела и проверяй себя по каждому правилу</p>
+          </div>
+          <div class="rules-home-grid" data-rules-home-grid></div>
+        </section>
+      </section>
+
+      <section id="season-screen" class="screen" aria-labelledby="season-title">
+        <div class="season-shell wrap">
+          <button class="text-button" type="button" data-action="home">
+            <span aria-hidden="true">←</span> На главную
+          </button>
+
+          <div class="season-mode-switch" aria-label="Режим полного сезона">
+            <button class="is-active" type="button" data-season-mode="main">
+              <span>🏒</span>
+              <div><strong>Значения на русском</strong><small>Основной сезон</small></div>
+            </button>
+            <button type="button" data-season-mode="english">
+              <span>EN</span>
+              <div><strong>Хоккейный английский</strong><small>Отдельный прогресс</small></div>
+            </button>
+          </div>
+
+          <article class="season-card">
+            <div class="season-card__top">
+              <div>
+                <span id="season-kicker" class="season-card__kicker">Большой хоккейный экзамен</span>
+                <h1 id="season-title">Полный сезон</h1>
+                <p id="season-description"></p>
+              </div>
+              <div class="season-number" aria-hidden="true">
+                <strong id="season-total-concepts">106</strong>
+                <span>карточек</span>
+              </div>
+            </div>
+
+            <div class="season-progress-block">
+              <div class="season-progress-block__top">
+                <span id="season-progress-label">Подготовка к первому матчу</span>
+                <strong id="season-progress-percent">0%</strong>
+              </div>
+              <div class="season-progress"><span id="season-progress-bar"></span></div>
+            </div>
+
+            <div id="season-stats" class="season-stats"></div>
+            <div id="season-message" class="season-message" hidden></div>
+
+            <div class="season-actions">
+              <button id="season-primary" class="primary-button" type="button" data-action="season-start">
+                Начать первый матч
+              </button>
+              <button id="season-errors" class="secondary-button" type="button" data-action="season-errors" hidden>
+                Переиграть ошибки
+              </button>
+              <button id="season-reset" class="season-reset" type="button" data-action="season-reset" hidden>
+                Начать сезон заново
+              </button>
+            </div>
+          </article>
+
+          <section id="season-breakdown-section" class="season-breakdown-section" hidden>
+            <div class="section-heading">
+              <div>
+                <span>Турнирная таблица</span>
+                <h2>Результаты по темам</h2>
+              </div>
+              <p>Здесь видно сильные стороны и темы для повторения</p>
+            </div>
+            <div id="season-breakdown" class="season-breakdown"></div>
+          </section>
+
+          <section class="season-rules">
+            <article><span id="season-match-total">9</span><div><strong>коротких матчей</strong><p>До 12 вопросов вместо одного длинного экзамена</p></div></article>
+            <article><span>✓</span><div><strong>автосохранение</strong><p>Можно выйти и продолжить позже в этом браузере</p></div></article>
+            <article><span>↻</span><div><strong>работа над ошибками</strong><p>После финала повторяются только сложные термины</p></div></article>
+          </section>
+        </div>
+      </section>
+
+      <section id="rules-screen" class="screen" aria-labelledby="rules-title">
+        <div class="rules-shell wrap">
+          <button class="text-button" type="button" data-action="home">
+            <span aria-hidden="true">←</span> На главную
+          </button>
+
+          <div class="rules-hero">
+            <div>
+              <span class="rules-hero__kicker">Хоккейная теория</span>
+              <h1 id="rules-title">Правила игры</h1>
+              <p>
+                Полный разбор раздела и тесты по каждому правилу. Сначала читаем книгу,
+                затем проверяем себя на игровых ситуациях.
+              </p>
+            </div>
+            <div class="rules-hero__stats">
+              <div><strong id="rules-sections-total">12</strong><span>разделов</span></div>
+              <div><strong id="rules-rules-total">91</strong><span>правил</span></div>
+              <div><strong id="rules-questions-total">303</strong><span>вопросов</span></div>
+            </div>
+          </div>
+
+          <div class="rules-filter-panel">
+            <div class="rules-filter-top">
+              <span>Фильтр по разделам</span>
+              <small id="rules-filter-result"></small>
+            </div>
+            <div id="rules-filters" class="rules-filters" aria-label="Фильтр разделов правил"></div>
+          </div>
+
+          <div id="rules-sections" class="rules-sections"></div>
+        </div>
+      </section>
+
+      <section id="lesson-screen" class="screen" aria-labelledby="lesson-title" aria-live="polite">
+        <div class="lesson-shell wrap">
+          <div class="lesson-topline">
+            <button class="text-button" type="button" data-action="rules">
+              <span aria-hidden="true">←</span> К правилам
+            </button>
+            <span id="lesson-kicker" class="quiz-category"></span>
+          </div>
+
+          <article class="lesson-hero">
+            <div class="lesson-hero__copy">
+              <span id="lesson-section-label">Раздел 01</span>
+              <h1 id="lesson-title">Игровая поверхность</h1>
+              <p id="lesson-intro"></p>
+              <div class="lesson-hero__actions">
+                <button class="primary-button" type="button" data-action="lesson-test">
+                  Тест по разделу
+                </button>
+                <button class="secondary-button" type="button" data-action="rules">
+                  К списку разделов
+                </button>
+              </div>
+            </div>
+            <div id="lesson-hero-visual" class="lesson-hero__visual"></div>
+          </article>
+
+          <div class="lesson-layout">
+            <aside class="lesson-toc" aria-label="Содержание раздела">
+              <span>В этом разделе</span>
+              <div id="lesson-toc"></div>
+            </aside>
+            <div id="lesson-content" class="lesson-content"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="glossary-screen" class="screen" aria-labelledby="glossary-title">
+        <div class="glossary-shell wrap">
+          <button class="text-button" type="button" data-action="home">
+            <span aria-hidden="true">←</span> На главную
+          </button>
+
+          <div class="glossary-hero">
+            <div>
+              <span>Хоккейный словарь</span>
+              <h1 id="glossary-title">Понимай язык игры</h1>
+              <p>Русские термины и понятные объяснения. Английские названия — дополнительный уровень.</p>
+            </div>
+            <div class="glossary-hero__score">
+              <strong id="glossary-total">106</strong>
+              <span>карточек</span>
+            </div>
+          </div>
+
+          <div class="glossary-toolbar">
+            <label class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input id="term-search" type="search" placeholder="Найти термин на русском или английском" autocomplete="off" />
+            </label>
+            <button class="study-button" type="button" data-action="study">
+              <span aria-hidden="true">▣</span> Учить 7 карточек
+            </button>
+            <button class="primary-button" type="button" data-action="category-quiz">
+              Тест на 8 вопросов
+            </button>
+            <button class="english-button" type="button" data-action="english-quiz">
+              EN · Хоккейный английский
+            </button>
+          </div>
+
+          <section class="category-panel" aria-labelledby="category-panel-title">
+            <div class="category-panel__heading">
+              <div>
+                <span>Тематические разделы</span>
+                <h2 id="category-panel-title">Что будем изучать?</h2>
+              </div>
+              <p>Выбери категорию — карточки и тест перестроятся автоматически</p>
+            </div>
+            <div id="category-filters" class="category-filters" aria-label="Категории терминов"></div>
+          </section>
+
+          <div class="glossary-results">
+            <p id="terms-found"></p>
+            <button id="clear-search" class="text-button" type="button" data-action="clear-search" hidden>
+              Сбросить поиск
+            </button>
+          </div>
+          <div id="terms-grid" class="terms-grid"></div>
+        </div>
+      </section>
+
+      <section id="study-screen" class="screen" aria-live="polite">
+        <div class="study-shell wrap">
+          <div class="quiz-topline">
+            <button class="text-button" type="button" data-action="glossary">
+              <span aria-hidden="true">←</span> В словарь
+            </button>
+            <span id="study-category" class="quiz-category"></span>
+            <span id="study-counter" class="question-counter"></span>
+          </div>
+
+          <div class="progress" aria-label="Прогресс карточек">
+            <span id="study-progress"></span>
+          </div>
+
+          <article id="study-card" class="study-card">
+            <span class="study-card__label">Хоккейный термин</span>
+            <p id="study-term-ru" class="study-card__term"></p>
+            <p class="study-card__prompt">Что означает этот термин?</p>
+
+            <div id="study-answer" class="study-card__answer" hidden>
+              <p id="study-description"></p>
+              <div class="study-card__english">
+                <small>По-английски</small>
+                <span id="study-term-en"></span>
+              </div>
+            </div>
+
+            <button id="reveal-button" class="primary-button" type="button" data-action="reveal">
+              Показать ответ
+            </button>
+            <button id="study-next-button" class="primary-button" type="button" data-action="study-next" hidden>
+              Понятно, дальше <span aria-hidden="true">→</span>
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section id="quiz-screen" class="screen" aria-live="polite">
+        <div class="quiz-shell wrap">
+          <div class="quiz-topline">
+            <button class="text-button" type="button" data-action="quit">
+              <span aria-hidden="true">←</span> <span id="quiz-exit-label">В раздевалку</span>
+            </button>
+            <span id="quiz-category" class="quiz-category"></span>
+            <span id="question-counter" class="question-counter"></span>
+          </div>
+
+          <div class="progress" aria-label="Прогресс теста">
+            <span id="progress-bar"></span>
+          </div>
+
+          <article class="question-card">
+            <div class="question-card__number" id="question-number"></div>
+            <p id="question-kicker" class="question-kicker"></p>
+            <h2 id="question-title"></h2>
+            <div id="question-visual" class="question-visual" hidden></div>
+            <div id="answers" class="answers" role="group" aria-label="Варианты ответа"></div>
+            <div id="feedback" class="feedback" role="status" aria-live="polite" hidden>
+              <span id="feedback-icon" class="feedback__icon"></span>
+              <div>
+                <strong id="feedback-title"></strong>
+                <p id="feedback-text"></p>
+                <p id="feedback-english" class="feedback__english" hidden></p>
+              </div>
+            </div>
+            <div class="quiz-navigation">
+              <button id="prev-button" class="secondary-button quiz-prev-button" type="button" data-action="prev-question" hidden>
+                <span aria-hidden="true">←</span> Назад
+              </button>
+              <button id="next-button" class="primary-button next-button" type="button" hidden>
+                Следующий вопрос <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </article>
+
+          <p class="keyboard-tip"><kbd>1</kbd>–<kbd>4</kbd> — выбрать ответ · <kbd>←</kbd> — назад</p>
+        </div>
+      </section>
+
+      <section id="result-screen" class="screen" aria-live="polite">
+        <div class="result-shell wrap">
+          <article class="result-card">
+            <div id="result-badge" class="result-badge">Матч окончен</div>
+            <h2 id="result-title">Отличная игра!</h2>
+            <p id="result-subtitle"></p>
+
+            <div class="score-ring" id="score-ring">
+              <div>
+                <strong id="score-percent">0%</strong>
+                <span>точность</span>
+              </div>
+            </div>
+
+            <div class="result-stars" id="result-stars" aria-label="Заработанные звёзды"></div>
+
+            <div class="result-stats">
+              <div><strong id="correct-count">0</strong><span>верно</span></div>
+              <div><strong id="wrong-count">0</strong><span>ошибок</span></div>
+              <div><strong id="best-result">0%</strong><span>рекорд</span></div>
+            </div>
+
+            <div class="result-actions">
+              <button class="primary-button" type="button" data-action="retry">Сыграть ещё раз</button>
+              <button id="result-mistakes-button" class="secondary-button" type="button" data-action="retry-mistakes" hidden>
+                Переиграть ошибки
+              </button>
+              <button id="result-back-button" class="secondary-button" type="button" data-action="quiz-return">
+                К выбору тестов
+              </button>
+            </div>
+          </article>
+
+          <section id="mistakes-section" class="mistakes" aria-labelledby="mistakes-title">
+            <div class="section-heading">
+              <div>
+                <span>Разбор матча</span>
+                <h2 id="mistakes-title">Посмотрим сложные моменты</h2>
+              </div>
+            </div>
+            <div id="mistakes-list" class="mistakes-list"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="term-dialog" class="term-dialog" aria-labelledby="term-dialog-title">
+      <button class="term-dialog__close" type="button" data-action="term-close" aria-label="Закрыть карточку">
+        ×
+      </button>
+      <div class="term-dialog__meta">
+        <span id="term-dialog-category"></span>
+        <small id="term-dialog-difficulty"></small>
+      </div>
+      <span class="term-dialog__kicker">Хоккейный термин</span>
+      <h2 id="term-dialog-title"></h2>
+      <p id="term-dialog-description" class="term-dialog__description"></p>
+      <div class="term-dialog__english">
+        <small>По-английски</small>
+        <strong id="term-dialog-english"></strong>
+      </div>
+      <div class="term-dialog__footer">
+        <button class="term-dialog__nav" type="button" data-action="term-prev">
+          <span aria-hidden="true">←</span> Предыдущая
+        </button>
+        <span id="term-dialog-counter"></span>
+        <button class="term-dialog__nav" type="button" data-action="term-next">
+          Следующая <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </dialog>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <p><b>Хоккейный класс</b> — учимся понимать игру, которую любим.</p>
+        <p>
+          Материалы подготовлены по
+          <a href="https://blob.iihf.com/iihf-media/iihfmvc/media/downloads/rule%20book/2026-27_iihf_rule_book.pdf" target="_blank" rel="noreferrer">официальной книге правил IIHF 2026/27</a>
+          (<a href="https://fhr.ru/upload/iblock/a20/Ofitsialnya-Kniga-Pravil-IIKHF-2026_2027.pdf" target="_blank" rel="noreferrer">RU</a>).
+        </p>
+      </div>
+      <div class="wrap footer__legal">
+        <p>
+          Иллюстрации и материалы книги правил IIHF принадлежат IIHF и используются здесь
+          в локальных учебных целях. При публикации проверьте условия использования.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
